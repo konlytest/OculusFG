@@ -115,12 +115,6 @@ using namespace osg;
 using namespace simgear;
 using namespace flightgear;
 
-
-
-extern osg::ref_ptr<osg::Camera> cameraRTTLeft;
-extern osg::ref_ptr<osg::Camera> cameraRTTRight;
-osg::Node::NodeMask cullMaskl;
-
 class FGHintUpdateCallback : public osg::StateAttribute::Callback {
 public:
   FGHintUpdateCallback(const char* configNode) :
@@ -1078,7 +1072,7 @@ class DebugPassListener : public SGPropertyChangeListener {
 public:
     DebugPassListener(osg::Switch* sw, int i) : _switch(sw), _index(i) {}
     virtual void valueChanged(SGPropertyNode* node) {
-       _switch->setValue(_index, node->getBoolValue());
+        _switch->setValue(_index, node->getBoolValue());
     }
 
 private:
@@ -1298,7 +1292,7 @@ FGRenderer::buildStage(CameraInfo* info,
         cgroup->getViewer()->addSlave(camera, projection, view, false);
     else
         cgroup->getViewer()->addSlave(camera, false);
-  //  installCullVisitor(camera);
+    installCullVisitor(camera);
     int slaveIndex = cgroup->getViewer()->getNumSlaves() - 1;
     if (stage->type == "display")
         info->addCamera( stage->type, camera, slaveIndex, true );
@@ -1649,7 +1643,6 @@ FGRenderer::update( ) {
         ->getLightNodeMask(_updateVisitor.get());
     if (_panel_hotspots->getBoolValue())
         cullMask |= simgear::PICK_BIT;
-	cullMaskl = cullMask;
     CameraGroup::getDefault()->setCameraCullMasks(cullMask);
 	if ( !_classicalRenderer ) {
 		_fogColor->set( toOsg( l->adj_fog_color() ) );

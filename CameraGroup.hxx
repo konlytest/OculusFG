@@ -33,7 +33,6 @@
 
 // For osgUtil::LineSegmentIntersector::Intersections, which is a typedef.
 #include <osgUtil/LineSegmentIntersector>
-
 namespace osg
 {
 class Camera;

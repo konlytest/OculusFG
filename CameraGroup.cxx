@@ -58,10 +58,7 @@
 #include <osgViewer/GraphicsWindow>
 #include <osgViewer/Renderer>
 
-osg::Matrix cameraMx;
-osg::Camera* cameraEx;
 using namespace osg;
-
 
 namespace
 {
@@ -425,9 +422,8 @@ void CameraGroup::update(const osg::Vec3d& position,
     double masterZoomFactor = zoomFactor();
     for (CameraList::iterator i = _cameras.begin(); i != _cameras.end(); ++i) {
         const CameraInfo* info = i->get();
-		//xuy
-		Camera* camera = info->getCamera(MAIN_CAMERA);
-		//xuy
+
+        Camera* camera = info->getCamera(MAIN_CAMERA);
         if ( camera ) {
             const View::Slave& slave = _viewer->getSlave(info->getMainSlaveIndex());
 
@@ -439,10 +435,6 @@ void CameraGroup::update(const osg::Vec3d& position,
             else
                 viewMatrix = masterView * slave._viewOffset;
             camera->setViewMatrix(viewMatrix);
-			//xuy
-			cameraMx = viewMatrix;
-			//xuy
-			//camera->get
             Matrix projectionMatrix;
             if (info->flags & GUI) {
                 projectionMatrix = osg::Matrix::ortho2D(0, info->width, 0, info->height);
@@ -481,9 +473,6 @@ void CameraGroup::update(const osg::Vec3d& position,
             } else {
                 Camera* farCamera = ii->second.camera;
                 farCamera->setViewMatrix(viewMatrix);
-				//xuy
-				cameraEx = farCamera;
-				//xuy
                 double left, right, bottom, top, parentNear, parentFar;
                 projectionMatrix.getFrustum(left, right, bottom, top,
                                             parentNear, parentFar);
