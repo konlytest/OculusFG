@@ -12,6 +12,10 @@ set(SOURCES
 	splash.cxx
 	viewer.cxx
 	viewmgr.cxx
+	oculusviewer.cpp
+	oculusdevice.cpp
+	oculuseventhandler.cpp
+	oculusupdateslavecallback.cpp
 	)
 
 set(HEADERS
@@ -25,6 +29,10 @@ set(HEADERS
 	splash.hxx
 	viewer.hxx
 	viewmgr.hxx
+	oculusviewer.h
+	oculusdevice.h
+	oculuseventhandler.h
+	oculusupdateslavecallback.h
 	)
 
 flightgear_component(Viewer "${SOURCES}" "${HEADERS}")

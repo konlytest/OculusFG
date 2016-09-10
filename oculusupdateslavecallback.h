@@ -4,9 +4,14 @@
  *  Created on: Jul 07, 2015
  *      Author: Björn Blissing
  */
+
+#ifndef _OSG_OCULUSUPDATESLAVECALLBACK_H_
+#define _OSG_OCULUSUPDATESLAVECALLBACK_H_
+
 #include <osgViewer/View>
+
 #include "oculusdevice.h"
-#include "oculushealthwarning.h"
+
 
 struct OculusUpdateSlaveCallback : public osg::View::Slave::UpdateSlaveCallback
 {
@@ -16,23 +21,16 @@ struct OculusUpdateSlaveCallback : public osg::View::Slave::UpdateSlaveCallback
 		RIGHT_CAMERA
 	};
 
-	OculusUpdateSlaveCallback(CameraType cameraType, OculusDevice* device, OculusSwapCallback* swapCallback, OculusHealthAndSafetyWarning* warning, osg::ref_ptr<osg::Camera> camera) :
+	OculusUpdateSlaveCallback(CameraType cameraType, OculusDevice* device, OculusSwapCallback* swapCallback) :
 		m_cameraType(cameraType),
 		m_device(device),
-		m_swapCallback(swapCallback),
-		m_warning(warning),
-		//nicole,2015/12/09---------------------
-		m_camera(camera)
-		//--------------------------------------
-		{}
+		m_swapCallback(swapCallback) {}
 
 	virtual void updateSlave(osg::View& view, osg::View::Slave& slave);
 
 	CameraType m_cameraType;
 	osg::ref_ptr<OculusDevice> m_device;
-	//nicole,2015/12/09---------------------
-	osg::ref_ptr<osg::Camera> m_camera;
-	//--------------------------------------------
 	osg::ref_ptr<OculusSwapCallback> m_swapCallback;
-	osg::ref_ptr<OculusHealthAndSafetyWarning> m_warning;
 };
+
+#endif // _OSG_OCULUSUPDATESLAVECALLBACK_H_

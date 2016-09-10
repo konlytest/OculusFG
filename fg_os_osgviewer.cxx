@@ -66,8 +66,6 @@
 
 #include "oculusviewer.h"
 #include "oculuseventhandler.h"
-#include "oculusviewconfig.h"
-#include "oculusdevicesdk.h"
 
 // Static linking of OSG needs special macros
 #ifdef OSG_LIBRARY_STATIC
@@ -333,11 +331,11 @@ void fgOSOpenWindow(bool stencil)
 	float nearClip = 0.01f;
 	float farClip = 10000.0f;
 	bool useTimewarp = true;
-	osg::ref_ptr<OculusViewConfig> oculusViewConfig = new OculusViewConfig(nearClip, farClip, useTimewarp);
+	//TODO:osg::ref_ptr<OculusViewConfig> oculusViewConfig = new OculusViewConfig(nearClip, farClip, useTimewarp);
 	// Add statistics handler
 	viewer->addEventHandler(new osgViewer::StatsHandler);
 	// Apply view config
-	viewer->apply(oculusViewConfig);
+	//TODO:viewer->apply(oculusViewConfig);
 //xuy------------------------------------------------------------------------------
 
 }
