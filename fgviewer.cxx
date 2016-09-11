@@ -38,10 +38,6 @@
 #include <Main/options.hxx>
 #include <Main/fg_init.hxx>
 
-//#include <oculusviewer.h>
-//#include <oculuseventhandler.h>
-
-
 class GraphDumpHandler : public  osgGA::GUIEventHandler
 {
 public:
@@ -107,7 +103,7 @@ void GraphDumpHandler::getUsage(osg::ApplicationUsage& usage) const
 int
 fgviewerMain(int argc, char** argv)
 {
-	std::cerr << ": No data loaded" << std::endl;
+
     sgUserDataInit(0);
 
     // use an ArgumentParser object to manage the program arguments.
@@ -229,10 +225,7 @@ fgviewerMain(int argc, char** argv)
 
     // pass the loaded scene graph to the viewer.
     viewer.setSceneData(loadedModel.get());
-	//xuy---------------------------------------------
 
-	//return 0;
-	//xuy----------------------------------------------
     int result = viewer.run();
     
     // clear cache now, since it contains SimGear objects. Otherwise SG_LOG
